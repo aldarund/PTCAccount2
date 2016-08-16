@@ -3,6 +3,7 @@ Script heavily based on the original [PTCAccount](https://github.com/jepayne1138
 Modified from [Kitryn](https://github.com/Kitryn/PTCAccount2).
 ## Description
 Semi-automatic creation of PTC accounts, with manual user intervention required for CAPTCHA input. This script is built on Selenium, which utilises a browser for automation rather than pure HTTP requests.
+
 It also runs off the ability to add a '+' in an email to create alternate emails. EX: test+123@gmail.com
 
 ## Installation
