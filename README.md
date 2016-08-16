@@ -7,6 +7,9 @@ Semi-automatic creation of PTC accounts, with manual user intervention required 
 
 It also runs off the ability to add a '+' in an email to create alternate emails. EX: test+123@gmail.com
 
+If you're using Gmail and want to automatically verify all accounts, use this gist: [Here](https://gist.github.com/sebastienvercammen/e7e0e9e57db246d7f941b789d8508186 or https://github.com/FrostTheFox/ptc-acc-gen/blob/master/gmailverify.js)
+I also added it to the files for convince
+
 ## Installation
 
 This script runs on Selenium using ChromeDriver. See the [Google documentation](https://sites.google.com/a/chromium.org/chromedriver/downloads) for platform specific installation.
