@@ -40,7 +40,7 @@ def parse_arguments(args):
         help='Compact the output to "username:password"'
     )
     parser.add_argument(
-        '-n', '--number', default=1,
+        '-n', '--number', type=int, default=1,
         help='Number of accounts to create'
     )
     parser.add_argument(
