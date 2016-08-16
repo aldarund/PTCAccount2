@@ -2,6 +2,8 @@
 PTCAccount2: Semi-automatic Pokemon Trainer Club account creator, with manual CAPTCHA prompts.
 Heavily based on PTCAccount by jepayne1138 at https://github.com/jepayne1138/PTCAccount
 Repo: https://github.com/Kitryn/PTCAccount2
+Updated to work with the email '+' method
+Repo: https://github.com/Chris221/PTCAccount2
 """
 
 import time
@@ -109,6 +111,7 @@ def create_account(username, password, email, birthday):
 
     This function returns true if account was created. Raises exceptions rather than returning false.
     """
+    #email = correct_email(email, username)
     if password is not None:
         _validate_password(password)
 
@@ -194,11 +197,17 @@ def _validate_response(driver):
     else:
         raise PTCException("Generic failure. User was not created.")
 
+def correct_email(email, username):
+    ename = str(email.split('@')[0])
+    edomain = str(email.split('@')[1])
+    newe = ename + "+" + str(username) + "@" + edomain
+    return newe
+
 
 def random_account(username=None, password=None, email=None, birthday=None):
     try_username = _random_string() if username is None else str(username)
     password = _random_string() if password is None else str(password)
-    try_email = _random_email() if email is None else str(email)
+    try_email = _random_email() if email is None else str(correct_email(email, try_username))
     try_birthday = _random_birthday() if birthday is None else str(birthday)
 
     if birthday is not None:

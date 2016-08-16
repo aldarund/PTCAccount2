@@ -1,8 +1,9 @@
 # Pokemon Trainer Club Account Creator 2
 Script heavily based on the original [PTCAccount](https://github.com/jepayne1138/PTCAccount), by [jepayne1138](https://github.com/jepayne1138).
-
+Modified from [Kitryn](https://github.com/Kitryn/PTCAccount2).
 ## Description
 Semi-automatic creation of PTC accounts, with manual user intervention required for CAPTCHA input. This script is built on Selenium, which utilises a browser for automation rather than pure HTTP requests.
+It also runs off the ability to add a '+' in an email to create alternate emails. EX: test+123@gmail.com
 
 ## Installation
 
@@ -12,7 +13,7 @@ OSX Installation: `brew install chromedriver`
 
 Once ChromeDriver is installed, install PTCAccount2 from Github using pip:
 
-`pip install git+https://github.com/Kitryn/PTCAccount2.git`
+`pip install git+https://github.com/Chris221/PTCAccount2.git`
 
 ## Use
 
@@ -27,17 +28,17 @@ Example 1 (Create entirely random new account):
 Account successfully created.
   Username:  BcZvTnlTMwHsa6v
   Password:  WgZApVU5edTBMCs
-  Email   :  ZApVgwHsa6sv@5aDsy.com
+  Email   :  test@gmail.com
 ```
 
 Example 2 (Create a new account with specified parameters):
 
 ```
-> ptc2 --username=foo --password=bar --email=shin@ramyun.com
+> ptc2 --username=foo --password=bar --email=test@gmail.com
 Account successfully created.
   Username:  foo
   Password:  bar
-  Email   :  shin@ramyun.com
+  Email   :  test+foo@gmail.com
 ```
 
 Extra options:
@@ -53,7 +54,7 @@ import the _ptcaccount2_ package to create new accounts in your own scripts:
 ```python
 >>> import ptcaccount2
 >>> ptcaccount2.random_account()
-{"username": "BcZvTnlTMwHsa6v", "password": "WgZApVU5edTBMCs", "email": "ZApVgwHsa6sv@5aDsy.com"}
+{"username": "BcZvTnlTMwHsa6v", "password": "WgZApVU5edTBMCs", "email": "test@gmail.com"}
 ```
 
 **Specifying your own data:**

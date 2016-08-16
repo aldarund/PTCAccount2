@@ -1,10 +1,10 @@
 from setuptools import setup
 
 DIST_NAME = 'PTCAccount2'
-VERSION = 'v2.0.2'
-AUTHOR = 'Kitryn'
-EMAIL = 'snowfennard@gmail.com'
-GITHUB_USER = 'Kitryn'
+VERSION = 'v2.0.3'
+AUTHOR = 'Chris'
+EMAIL = 'Chris@ChrisSiena.com'
+GITHUB_USER = 'Chris221'
 GITHUB_URL = 'https://github.com/{GITHUB_USER}/{DIST_NAME}'.format(**locals())
 
 setup(
