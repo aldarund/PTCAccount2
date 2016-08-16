@@ -16,9 +16,15 @@ This script runs on Selenium using ChromeDriver. See the [Google documentation](
 
 OSX Installation: `brew install chromedriver`
 
-Once ChromeDriver is installed, install PTCAccount2 from Github using pip:
+Once ChromeDriver is installed, install PTCAccount2 from Github using pip (Run in either `Git Bash`, `CMD` on Winodws, or `Terminal` on Linux/MacOS):
 
 `pip install git+https://github.com/Chris221/PTCAccount2.git`
+
+## Installation
+
+To upgrade run in either `Git Bash`, `CMD` on Winodws, or `Terminal` on Linux/MacOS:
+
+`pip install git+https://github.com/Chris221/PTCAccount2.git --upgrade`
 
 ## Use
 
