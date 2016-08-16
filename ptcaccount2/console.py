@@ -1,7 +1,11 @@
 import argparse
+import imaplib
 import sys
 
+import time
+
 import ptcaccount2
+from ptcaccount2.mail import email_login, verify_email
 from ptcaccount2.ptcexceptions import *
 
 
@@ -35,6 +39,18 @@ def parse_arguments(args):
         '--compact', action='store_true',
         help='Compact the output to "username:password"'
     )
+    parser.add_argument(
+        '-n', '--number', default=1,
+        help='Number of accounts to create'
+    )
+    parser.add_argument(
+        '-s', '--mailserver', default=None,
+        help='Number of accounts to create'
+    )
+    parser.add_argument(
+        '-mp', '--mailpassword', default=None,
+        help='Number of accounts to create'
+    )
 
     return parser.parse_args(args)
 
@@ -42,22 +58,36 @@ def parse_arguments(args):
 def entry():
     """Main entry point for the package console commands"""
     args = parse_arguments(sys.argv[1:])
-    try:
-        print("Creating new account:")
-        account_info = ptcaccount2.random_account(args.username, args.password, args.email, args.birthday)
+    if args.mailserver:
+        M = imaplib.IMAP4_SSL(args.mailserver)
+        email_login(M, args.email, args.mailpassword)
 
-        if args.compact:
-            print('{}:{}'.format(account_info["username"], account_info["password"]))
-        else:
-            print('  Username:  {}'.format(account_info["username"]))
-            print('  Password:  {}'.format(account_info["password"]))
-            print('  Email   :  {}'.format(account_info["email"]))
-            print('\n')
+    for i in range(0, args.number):
+        try:
+            print("Creating new account:")
+            account_info = ptcaccount2.random_account(args.username, args.password, args.email, args.birthday)
+            if args.mailserver:
+                while not verify_email(M):
+                    print "activating email. Sleeping"
+                    time.sleep(5)
+            if args.compact:
+                print('{}:{}'.format(account_info["username"], account_info["password"]))
+            else:
+                print('  Username:  {}'.format(account_info["username"]))
+                print('  Password:  {}'.format(account_info["password"]))
+                print('  Email   :  {}'.format(account_info["email"]))
+                print('\n')
+            with open("usernames.txt", "a") as ulist:
+                ulist.write(account_info["username"]+":"+account_info["password"]+"\n")
+                ulist.close()
+            with open("supervisor.txt", "a") as ulist:
+                ulist.write('-a "ptc" -u "%s" -p "%s"\n' % (account_info["username"], account_info["password"]))
+                ulist.close()
 
-    # Handle account creation failure exceptions
-    except PTCInvalidPasswordException as err:
-        print('Invalid password: {}'.format(err))
-    except (PTCInvalidEmailException, PTCInvalidNameException) as err:
-        print('Failed to create account! {}'.format(err))
-    except PTCException as err:
-        print('Failed to create account! General error:  {}'.format(err))
+        # Handle account creation failure exceptions
+        except PTCInvalidPasswordException as err:
+            print('Invalid password: {}'.format(err))
+        except (PTCInvalidEmailException, PTCInvalidNameException) as err:
+            print('Failed to create account! {}'.format(err))
+        except PTCException as err:
+            print('Failed to create account! General error:  {}'.format(err))
